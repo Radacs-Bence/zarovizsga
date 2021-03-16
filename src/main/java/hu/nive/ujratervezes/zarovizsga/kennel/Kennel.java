@@ -19,14 +19,31 @@ public class Kennel {
     }
 
     public Dog findByName(String name) {
-        return null;
+        Dog found = null;
+        for (Dog dog : Dogs) {
+            if (dog.getName().equals(name)){
+                found = dog;
+            }
+        }
+        if (found == null){
+            throw new IllegalArgumentException("Dog not found!");
+        }
+        return found;
     }
 
     public void playWith(String name, int hours) {
+        Dog playMate = findByName(name);
+        playMate.play(hours);
     }
 
-    public <E> List<E> getHappyDogNames(int minHappiness) {
-        return null;
+    public List<String> getHappyDogNames(int minHappiness) {
+        List<String> happyDogNames = new ArrayList<>();
+        for (Dog dog : Dogs) {
+            if (dog.getHappiness() >= minHappiness){
+                happyDogNames.add(dog.getName());
+            }
+        }
+        return happyDogNames;
     }
 
     public List<Dog> getDogs() {
