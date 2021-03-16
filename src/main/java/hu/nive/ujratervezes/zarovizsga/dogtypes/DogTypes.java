@@ -6,8 +6,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public class DogTypes {
 
@@ -38,6 +41,7 @@ public class DogTypes {
             while (rs.next()) {
                 searchedDogTypes.add(rs.getString("name").toLowerCase());
             }
+            Collections.sort(searchedDogTypes, Collator.getInstance(new Locale("hu", "HU")));
             return searchedDogTypes;
         } catch (SQLException sqle) {
             throw new IllegalArgumentException("Error by insert", sqle);
